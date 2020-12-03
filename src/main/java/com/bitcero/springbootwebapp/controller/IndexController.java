@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -65,6 +66,15 @@ public class IndexController {
         // usuarios.add(new Usuario("Pepe", "Gonzalez", "pepe@email.com"));
         // usuarios.add(new Usuario("Maria", "Perez", "Maria@email.com"));
 
+        model.addAttribute("titulo", "Listado de usuarios");
+        // model.addAttribute("usuarios", usuarios);
+        return "listar";
+    }
+
+    // Forma alternativa para pasar datos a la vista. De esta forma los usuarios estarian disponibles como atributo en todos los controladores.
+
+    @ModelAttribute("usuarios")
+    public List<Usuario> listarUsuarios(){
         List<Usuario> usuarios = Arrays.asList(
             new Usuario("Andres", "Guzman", "andres@email.com"),
             new Usuario("Pepe", "Gonzalez", "pepe@email.com"),
@@ -72,8 +82,6 @@ public class IndexController {
             new Usuario("Juan", "Pavón", "juan@email.com")
         );
 
-        model.addAttribute("titulo", "Listado de usuarios");
-        model.addAttribute("usuarios", usuarios);
-        return "listar";
+        return usuarios;
     }
 }
