@@ -1,5 +1,9 @@
 package com.bitcero.springbootwebapp.controller;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import com.bitcero.springbootwebapp.models.Usuario;
@@ -52,5 +56,24 @@ public class IndexController {
 
 
         return "perfil";
+    }
+
+    @RequestMapping("/listar")
+    public String listar(Model model) {
+        // List<Usuario> usuarios = new ArrayList<>();
+        // usuarios.add(new Usuario("Andres", "Guzman", "andres@email.com"));
+        // usuarios.add(new Usuario("Pepe", "Gonzalez", "pepe@email.com"));
+        // usuarios.add(new Usuario("Maria", "Perez", "Maria@email.com"));
+
+        List<Usuario> usuarios = Arrays.asList(
+            new Usuario("Andres", "Guzman", "andres@email.com"),
+            new Usuario("Pepe", "Gonzalez", "pepe@email.com"),
+            new Usuario("Maria", "Perez", "Maria@email.com"),
+            new Usuario("Juan", "Pavón", "juan@email.com")
+        );
+
+        model.addAttribute("titulo", "Listado de usuarios");
+        model.addAttribute("usuarios", usuarios);
+        return "listar";
     }
 }

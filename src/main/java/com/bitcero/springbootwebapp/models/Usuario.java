@@ -5,6 +5,21 @@ public class Usuario {
     private String apellidos;
     private String email;
 
+    public Usuario() {
+
+    };
+
+    /**
+     * @param nombre
+     * @param apellidos
+     * @param email
+     */
+    public Usuario(String nombre, String apellidos, String email) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+    }
+
     /**
      * @return the nombre
      */
@@ -46,4 +61,6 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }
