@@ -1,5 +1,7 @@
 package com.bitcero.springbootwebapp.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,22 @@ public class EjemploParamsController {
         // http://localhost:8080/params/string?texto=hola%20spring
         model.addAttribute("titulo", "Recibir parametros del requesT HTTP GET");
         model.addAttribute("resultado", "El texto enviado es: ".concat(texto));
+        return "params/ver";
+    }
+
+    @GetMapping("/mix-params")
+    public String mixParams(@RequestParam String saludo, @RequestParam int numero, Model model) {
+        model.addAttribute("titulo", "Recibir Multiples parámetros del requesT HTTP GET");
+        model.addAttribute("resultado", "El saludo enviado es: ".concat(saludo) + "Numero: " + numero);
+        return "params/ver";
+    }
+
+    @GetMapping("/mix-params-request")
+    public String mixParams(HttpServletRequest request, Model model) {
+        String saludo = request.getParameter("saludo");
+        int numero = Integer.parseInt(request.getParameter("numero"));
+        model.addAttribute("titulo", "Recibir Multiples parámetros del requesT HTTP GET");
+        model.addAttribute("resultado", "El saludo enviado es: ".concat(saludo) + "Numero: " + numero);
         return "params/ver";
     }
 }
