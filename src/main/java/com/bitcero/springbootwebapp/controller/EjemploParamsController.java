@@ -37,8 +37,13 @@ public class EjemploParamsController {
 
     @GetMapping("/mix-params-request")
     public String mixParams(HttpServletRequest request, Model model) {
+        int numero;
         String saludo = request.getParameter("saludo");
-        int numero = Integer.parseInt(request.getParameter("numero"));
+        try {
+            numero = Integer.parseInt(request.getParameter("numero"));
+        } catch (NumberFormatException e) {
+            numero = 0;
+        }
         model.addAttribute("titulo", "Recibir Multiples parámetros del requesT HTTP GET");
         model.addAttribute("resultado", "El saludo enviado es: ".concat(saludo) + "Numero: " + numero);
         return "params/ver";
